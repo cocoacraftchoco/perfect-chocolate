@@ -3,12 +3,12 @@ import { Sparkles } from 'lucide-react';
 
 // @ts-ignore
 import step1Img from '../images/step1.png';
-// @ts-ignore - Isolated roasted cocoa beans PNG cutout
-import step2Img from 'C:/Users/DELL/.gemini/antigravity/brain/ce6fe00e-1fe3-4a8a-b532-08fb1661970a/step2_roasted_beans_cutout_1787142087422.png';
-// @ts-ignore - Isolated conching liquid chocolate swirl PNG cutout
-import step3Img from 'C:/Users/DELL/.gemini/antigravity/brain/ce6fe00e-1fe3-4a8a-b532-08fb1661970a/step3_conching_swirl_cutout_1787142470838.png';
-// @ts-ignore - Isolated broken chocolate bar snap PNG cutout
-import step4Img from 'C:/Users/DELL/.gemini/antigravity/brain/ce6fe00e-1fe3-4a8a-b532-08fb1661970a/step4_tempering_bar_cutout_1787142721415.png';
+// @ts-ignore
+import step2Img from '../images/step2.png';
+// @ts-ignore
+import step3Img from '../images/step3.png';
+// @ts-ignore
+import step4Img from '../images/step4.png';
 // @ts-ignore
 import step5Img from '../images/step5.png';
 
