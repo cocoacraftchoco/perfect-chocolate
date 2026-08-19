@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 // @ts-ignore
 import meltingChocolateImg from '../images/melting_chocolate_brandname.png';
-
-// High resolution transparent cacao leaf asset
-const leafImg = 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=400&q=80';
-
+// @ts-ignore
+import cacaoLeafImg from '../images/cacao_leaf_cutout.png';
 
 export default function AboutUs() {
   const [transparentImg, setTransparentImg] = useState<string>(meltingChocolateImg);
-  const [transparentLeaf, setTransparentLeaf] = useState<string>(leafImg);
+  const [transparentLeaf, setTransparentLeaf] = useState<string>(cacaoLeafImg);
 
   useEffect(() => {
     // Process Melting Chocolate Bar Image (Remove Black background)
@@ -22,31 +20,25 @@ export default function AboutUs() {
       if (!ctx) return;
 
       ctx.drawImage(img, 0, 0);
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imageData.data;
+      const imgData = ctx.getImageData(0, 0, img.width, img.height);
+      const data = imgData.data;
 
       for (let i = 0; i < data.length; i += 4) {
         const r = data[i];
         const g = data[i + 1];
         const b = data[i + 2];
-
-        const maxColor = Math.max(r, g, b);
-        if (maxColor < 32) {
-          if (maxColor < 15) {
-            data[i + 3] = 0; // 100% Transparent
-          } else {
-            data[i + 3] = Math.floor(((maxColor - 15) / 17) * 255);
-          }
+        if (r < 30 && g < 30 && b < 30) {
+          data[i + 3] = 0;
         }
       }
 
-      ctx.putImageData(imageData, 0, 0);
+      ctx.putImageData(imgData, 0, 0);
       setTransparentImg(canvas.toDataURL('image/png'));
     };
 
-    // Process Cacao Leaf Image (Remove White / Checkerboard background)
+    // Canvas Processing: Erase all white/cream square box background pixels from Cacao Leaf
     const lImg = new Image();
-    lImg.src = leafImg;
+    lImg.src = cacaoLeafImg;
     lImg.onload = () => {
       const canvas = document.createElement('canvas');
       canvas.width = lImg.width;
@@ -55,62 +47,53 @@ export default function AboutUs() {
       if (!ctx) return;
 
       ctx.drawImage(lImg, 0, 0);
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imageData.data;
+      const imgData = ctx.getImageData(0, 0, lImg.width, lImg.height);
+      const data = imgData.data;
 
       for (let i = 0; i < data.length; i += 4) {
         const r = data[i];
         const g = data[i + 1];
         const b = data[i + 2];
-
-        const isGreenLeaf = (g > r + 10 && g > b + 10) || (g > 60 && r < 120 && b < 100);
-        const minColor = Math.min(r, g, b);
-        const maxColor = Math.max(r, g, b);
-        const colorDiff = maxColor - minColor;
-
-        if (!isGreenLeaf && (minColor > 145 || colorDiff < 25)) {
+        if (r > 200 && g > 195 && b > 185) {
           data[i + 3] = 0; // 100% Transparent
         }
       }
 
-      ctx.putImageData(imageData, 0, 0);
+      ctx.putImageData(imgData, 0, 0);
       setTransparentLeaf(canvas.toDataURL('image/png'));
     };
   }, []);
 
   return (
-    <section id="story" className="relative bg-[#FAF4EA] text-[#2C140E] overflow-hidden">
-
-      {/* MAIN SECTION CONTENT */}
-      <div className="pt-6 sm:pt-10 pb-16 sm:pb-24 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-start relative">
-
-          {/* LEFT SIDE: Floating Transparent Melting Chocolate Masterpiece */}
-          <div className="lg:col-span-5 relative flex flex-col items-center lg:items-start justify-center pt-4 sm:pt-8 lg:pt-12">
-
-            {/* Premium Transparent Melting Chocolate Bar Floating Art */}
-            <div className="relative z-30 transform -rotate-3 origin-bottom scale-105 sm:scale-110 hover:rotate-0 transition-transform duration-500 max-w-sm sm:max-w-md lg:max-w-lg translate-x-3 sm:translate-x-6 lg:translate-x-9 lg:translate-y-6">
-              <img
-                src={transparentImg}
-                alt="Perfect Chocolate Artisanal Bar"
-                className="w-full h-auto object-contain drop-shadow-[0_25px_35px_rgba(40,15,10,0.4)] transform hover:scale-105 transition-transform duration-700 select-none"
+    <section className="bg-[#FAF6EE] py-16 sm:py-24 relative overflow-hidden select-none border-t border-b border-[#E8DCC4]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Main Grid Container */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-0 lg:gap-0">
+          
+          {/* LEFT COLUMN: Melting Chocolate Bar Graphic (Shifted Slightly Leftward) */}
+          <div className="lg:col-span-5 relative z-30 flex justify-center lg:justify-start lg:-translate-x-2 xl:translate-x-0 -translate-y-4 sm:-translate-y-8 lg:-translate-y-12">
+            <div className="w-96 sm:w-[520px] lg:w-[680px] xl:w-[740px] transition-transform duration-700 hover:scale-105 filter drop-shadow-[0_28px_50px_rgba(20,5,0,0.6)]">
+              <img 
+                src={transparentImg} 
+                alt="Perfect Chocolate Handcrafted Bar with Splash" 
+                className="w-full h-auto object-contain select-none transform lg:scale-120 xl:scale-125 origin-left"
               />
             </div>
-
           </div>
 
-          {/* RIGHT SIDE: Dark Chocolate Box Card with Melt Dripping Liquid Bottom */}
-          <div className="lg:col-span-7 relative z-10 lg:-ml-6 mt-4 lg:mt-0">
+          {/* RIGHT COLUMN: Dark Chocolate Container Card */}
+          <div className="lg:col-span-7 relative z-10 lg:-ml-12 mt-4 lg:mt-0">
 
             {/* Dark Chocolate Box Container */}
             <div className="bg-[#1D0E08] text-[#FAF6EE] pt-5 pb-8 pr-6 sm:pt-7 sm:pb-12 sm:pr-10 lg:pt-8 lg:pb-14 lg:pr-12 pl-16 sm:pl-32 lg:pl-44 rounded-t-3xl shadow-2xl relative z-10 border-t border-l border-r border-[#5A2E20] space-y-4 overflow-visible">
 
-              {/* REALISTIC FLOATING COCOA LEAF CUTOUT AT TOP RIGHT CORNER (100% Transparent PNG) */}
-              <div className="absolute -top-10 -right-4 sm:-top-14 sm:-right-8 z-30 w-28 h-28 sm:w-36 sm:h-36 pointer-events-none transform rotate-12 hover:rotate-6 transition-transform duration-700 filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.55)]">
+              {/* REALISTIC SINGLE GREEN CACAO LEAF FLOATING AT TOP RIGHT CORNER (Pure Transparent PNG) */}
+              <div className="absolute -top-10 -right-4 sm:-top-14 sm:-right-8 z-30 w-28 h-36 sm:w-36 sm:h-44 pointer-events-none transform rotate-45 transition-transform duration-700">
                 <img 
                   src={transparentLeaf} 
-                  alt="Transparent Cacao Leaf Cutout" 
-                  className="w-full h-full object-contain select-none"
+                  alt="Single Realistic Cacao Leaf" 
+                  className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.7)] select-none"
                 />
               </div>
 

@@ -83,9 +83,9 @@ export default function FeaturedCollection({ onAddToCart }: FeaturedCollectionPr
 
   return (
     <section id="dark-cocoa" className="py-20 lg:py-28 bg-[#1D0E08] relative overflow-hidden">
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <span className="type-large-title text-gold-400 text-3xl sm:text-4xl block">
@@ -102,18 +102,18 @@ export default function FeaturedCollection({ onAddToCart }: FeaturedCollectionPr
         {/* Product Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {PRODUCTS.map((prod) => (
-            <div 
+            <div
               key={prod.id}
               className="cocoa-glass-panel rounded-2xl overflow-hidden group hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between border border-gold-500/20 hover:border-gold-500/50 shadow-2xl"
             >
               {/* Product Image Container */}
               <div className="relative h-64 overflow-hidden bg-cocoa-950">
-                <img 
-                  src={prod.image} 
+                <img
+                  src={prod.image}
                   alt={prod.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
                 />
-                
+
                 {/* Floating Tag */}
                 <span className="absolute top-3 left-3 bg-cocoa-950/90 text-gold-300 text-[10px] uppercase font-barlow tracking-widest px-2.5 py-1 rounded-full border border-gold-500/40 backdrop-blur-md">
                   {prod.tag}
@@ -125,14 +125,14 @@ export default function FeaturedCollection({ onAddToCart }: FeaturedCollectionPr
 
                 {/* Quick View Overlay Button */}
                 <div className="absolute inset-0 bg-cocoa-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                  <button 
+                  <button
                     onClick={() => setSelectedProduct(prod)}
                     className="p-3 bg-cocoa-900/90 text-gold-300 rounded-full hover:bg-gold-500 hover:text-cocoa-950 transition-colors shadow-lg border border-gold-500/40"
                     title="Quick Inspection"
                   >
                     <Eye className="w-5 h-5" />
                   </button>
-                  <button 
+                  <button
                     onClick={() => handleAdd(prod)}
                     className="p-3 bg-gold-500 text-cocoa-950 rounded-full hover:bg-gold-400 transition-colors shadow-gold-glow"
                     title="Add to Cart"
@@ -162,14 +162,13 @@ export default function FeaturedCollection({ onAddToCart }: FeaturedCollectionPr
                   <div className="text-xl font-bold font-heading text-gold-metallic">
                     ₹{prod.price.toLocaleString('en-IN')}
                   </div>
-                  
-                  <button 
+
+                  <button
                     onClick={() => handleAdd(prod)}
-                    className={`px-4 py-2 rounded-xl text-xs font-barlow tracking-wider uppercase font-semibold transition-all duration-300 flex items-center gap-1.5 ${
-                      addedIds[prod.id]
+                    className={`px-4 py-2 rounded-xl text-xs font-barlow tracking-wider uppercase font-semibold transition-all duration-300 flex items-center gap-1.5 ${addedIds[prod.id]
                         ? 'bg-emerald-600 text-white'
                         : 'bg-cocoa-800/80 text-gold-300 hover:bg-gold-500 hover:text-cocoa-950 border border-gold-500/30 shadow-md'
-                    }`}
+                      }`}
                   >
                     {addedIds[prod.id] ? (
                       <>
@@ -195,7 +194,7 @@ export default function FeaturedCollection({ onAddToCart }: FeaturedCollectionPr
       {selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cocoa-950/80 backdrop-blur-md animate-fadeIn">
           <div className="cocoa-glass-panel max-w-lg w-full rounded-2xl overflow-hidden border border-gold-500/40 p-6 space-y-4 relative">
-            <button 
+            <button
               onClick={() => setSelectedProduct(null)}
               className="absolute top-4 right-4 text-cocoa-300 hover:text-gold-400 text-lg font-bold"
             >
@@ -211,7 +210,7 @@ export default function FeaturedCollection({ onAddToCart }: FeaturedCollectionPr
             </div>
             <div className="flex items-center justify-between pt-4 border-t border-cocoa-800">
               <span className="text-2xl font-heading text-gold-metallic">₹{selectedProduct.price.toLocaleString('en-IN')}</span>
-              <button 
+              <button
                 onClick={() => { handleAdd(selectedProduct); setSelectedProduct(null); }}
                 className="px-6 py-3 rounded-xl bg-gradient-to-r from-gold-400 to-gold-600 text-cocoa-950 font-bold uppercase text-xs tracking-wider"
               >

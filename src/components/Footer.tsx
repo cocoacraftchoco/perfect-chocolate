@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Phone, MapPin, Mail, ShieldCheck, Sparkles, Heart } from 'lucide-react';
+import { Phone, MapPin, Mail, ShieldCheck, Sparkles, Heart, Instagram } from 'lucide-react';
 // @ts-ignore
 import logoImg from '../images/logo perfect bg.png';
 
@@ -111,15 +111,28 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Right-side Description & Tagline */}
+            {/* Right-side Description & Tagline + Instagram Button */}
             <div className="space-y-3 flex-1">
               <p className="font-southing text-[#EAB308] text-2xl sm:text-3xl tracking-wide opacity-95">
                 premium quality guaranteed
               </p>
 
               <p className="text-xs sm:text-sm text-[#D8C2B0] font-sans font-light leading-relaxed">
-                Established in 2026, Perfect Chocolate Co. is dedicated to crafting artisanal single-origin chocolates, combining traditional European bean-to-bar mastery with Dubai's finest luxury ingredients.
+                Established in 2026, Perfect Chocolate Co. is dedicated to crafting artisanal single-origin chocolates, combining traditional European bean-to-bar mastery with luxury ingredients.
               </p>
+
+              {/* Prominent Instagram Social Link Button */}
+              <div className="pt-2">
+                <a
+                  href="https://www.instagram.com/perfectchocolatee?igsh=dWp1YXkzc2NwdDJ5"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-[#3D1E15] hover:bg-[#EAB308] text-[#EAB308] hover:text-[#1D0E08] border border-[#D4AF37]/40 transition-all duration-300 shadow-md group font-barlow text-xs sm:text-sm font-semibold"
+                >
+                  <Instagram className="w-4 h-4 text-[#EAB308] group-hover:text-[#1D0E08] transition-colors shrink-0" />
+                  <span>Follow Us on Instagram</span>
+                </a>
+              </div>
             </div>
 
           </div>
@@ -150,7 +163,7 @@ export default function Footer() {
                 <div>
                   <div className="text-[11px] uppercase tracking-widest text-[#EAB308] font-bold">OUR LOCATION:</div>
                   <div className="text-[#D8C2B0] leading-snug">
-                    742 Imperial Avenue, Bldg No. 4, Grand Cocoa Estate, NY 10022
+                    Thaltej-Cross Road, Ahmedabad 380059
                   </div>
                 </div>
               </div>
@@ -196,7 +209,7 @@ export default function Footer() {
                 <div>
                   <div className="text-[11px] uppercase tracking-widest text-[#EAB308] font-bold">OUR LOCATION:</div>
                   <div className="text-[#D8C2B0] leading-snug">
-                    Queen Zain Alsharaf Street, Fifth Avenue Atelier, Manhattan, NY
+                    Thaltej-Cross Road, Ahmedabad 380059
                   </div>
                 </div>
               </div>
@@ -224,7 +237,17 @@ export default function Footer() {
             <span>© 2026 Perfect Chocolate Co. Crafted with</span>
             <Heart className="w-3.5 h-3.5 text-[#EAB308] fill-current inline" />
           </div>
-          <div className="flex space-x-6 text-[#D8C2B0]">
+          <div className="flex items-center space-x-6 text-[#D8C2B0]">
+            <a 
+              href="https://www.instagram.com/perfectchocolatee?igsh=dWp1YXkzc2NwdDJ5"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#EAB308] transition-colors flex items-center gap-1.5 text-[#EAB308] font-semibold"
+              title="Visit Instagram Page"
+            >
+              <Instagram className="w-4 h-4 text-[#EAB308]" />
+              <span>Instagram</span>
+            </a>
             <a href="#privacy" className="hover:text-[#EAB308] transition-colors">Privacy Policy</a>
             <a href="#terms" className="hover:text-[#EAB308] transition-colors">Terms & Conditions</a>
             <a href="#coldchain" className="hover:text-[#EAB308] transition-colors">Cold-Chain Express</a>

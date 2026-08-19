@@ -29,7 +29,7 @@ export default function App() {
       name: 'Royal 70% Dark Gold Reserve',
       price: 1499,
       quantity: 1,
-      image: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=800&q=80',
       cacao: '70% Cacao'
     },
     {
@@ -37,7 +37,7 @@ export default function App() {
       name: 'Dubai Pistachio & Knafeh Velvet',
       price: 1799,
       quantity: 1,
-      image: 'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1582293041079-7814c2f12063?auto=format&fit=crop&w=800&q=80',
       cacao: '55% Milk Cacao'
     }
   ]);

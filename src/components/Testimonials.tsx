@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-// High resolution artisanal chocolate artwork assets for testimonials
-const rawLeftChocolate = 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=400&q=80';
-const rawRightChocolate = 'https://images.unsplash.com/photo-1548907040-4baa42d10919?auto=format&fit=crop&w=400&q=80';
-
+// @ts-ignore
+import leftImg from '../images/testomonials_left.png';
+// @ts-ignore
+import rightImg from '../images/testomonials_right.png';
 
 interface Testimonial {
   id: number;
@@ -36,43 +36,57 @@ const TESTIMONIALS: Testimonial[] = [
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [leftImg, setLeftImg] = useState<string>(rawLeftChocolate);
-  const [rightImg, setRightImg] = useState<string>(rawRightChocolate);
+  const [cleanLeftImg, setCleanLeftImg] = useState<string>(leftImg);
+  const [cleanRightImg, setCleanRightImg] = useState<string>(rightImg);
 
-  // Automatically make white backgrounds transparent for the 2 chocolate illustrations
   useEffect(() => {
-    const processImage = (src: string, setter: (res: string) => void) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        ctx.drawImage(img, 0, 0);
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imageData.data;
-
-        for (let i = 0; i < data.length; i += 4) {
-          const r = data[i];
-          const g = data[i + 1];
-          const b = data[i + 2];
-
-          // Check if pixel is pure white / light off-white background
-          if (r > 225 && g > 225 && b > 225) {
-            data[i + 3] = 0; // Make 100% transparent
-          }
+    // Canvas processing: Erase all white/cream square box background pixels from Left Truffle
+    const lImg = new Image();
+    lImg.src = leftImg;
+    lImg.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = lImg.width;
+      canvas.height = lImg.height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.drawImage(lImg, 0, 0);
+      const imgData = ctx.getImageData(0, 0, lImg.width, lImg.height);
+      const data = imgData.data;
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+        if (r > 200 && g > 195 && b > 185) {
+          data[i + 3] = 0; // 100% Transparent
         }
-
-        ctx.putImageData(imageData, 0, 0);
-        setter(canvas.toDataURL('image/png'));
-      };
+      }
+      ctx.putImageData(imgData, 0, 0);
+      setCleanLeftImg(canvas.toDataURL('image/png'));
     };
 
-    processImage(rawLeftChocolate, setLeftImg);
-    processImage(rawRightChocolate, setRightImg);
+    // Canvas processing: Erase all white/cream square box background pixels from Right Chocolate Piece
+    const rImg = new Image();
+    rImg.src = rightImg;
+    rImg.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = rImg.width;
+      canvas.height = rImg.height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.drawImage(rImg, 0, 0);
+      const imgData = ctx.getImageData(0, 0, rImg.width, rImg.height);
+      const data = imgData.data;
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+        if (r > 200 && g > 195 && b > 185) {
+          data[i + 3] = 0; // 100% Transparent
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+      setCleanRightImg(canvas.toDataURL('image/png'));
+    };
   }, []);
 
   const handlePrev = () => {
@@ -107,21 +121,21 @@ export default function Testimonials() {
         {/* Testimonial Content Wrapper */}
         <div className="relative min-h-[260px] sm:min-h-[220px] flex items-center justify-center">
           
-          {/* LEFT CHOCOLATE ILLUSTRATION (Floating higher up near top left) */}
-          <div className="absolute left-0 sm:left-2 lg:left-4 -top-6 sm:-top-10 lg:-top-14 z-20 w-20 sm:w-32 lg:w-36 pointer-events-none transform -rotate-12 transition-transform duration-700 hover:rotate-0">
+          {/* LEFT FLOATING GOLD DRIZZLED TRUFFLE (Shifted EVEN HIGHER UP) */}
+          <div className="absolute -left-2 sm:-left-4 lg:-left-8 -top-12 sm:-top-16 lg:-top-20 z-20 w-28 sm:w-36 lg:w-44 pointer-events-none transform -rotate-6 transition-transform duration-700 hover:rotate-0">
             <img 
-              src={leftImg} 
-              alt="Artisanal Chocolate Truffle" 
-              className="w-full h-auto object-contain filter drop-shadow-[0_12px_20px_rgba(60,30,15,0.2)] animate-float-slow"
+              src={cleanLeftImg} 
+              alt="Gold Drizzled Chocolate Truffle" 
+              className="w-full h-auto object-contain filter drop-shadow-[0_16px_28px_rgba(60,30,15,0.35)] select-none animate-float-slow"
             />
           </div>
 
-          {/* RIGHT CHOCOLATE ILLUSTRATION (Shifted further to the right) */}
-          <div className="absolute -right-2 sm:-right-6 lg:-right-10 top-[65%] sm:top-[68%] z-20 w-20 sm:w-32 lg:w-36 pointer-events-none transform rotate-12 transition-transform duration-700 hover:rotate-0">
+          {/* RIGHT FLOATING CHOCOLATE PIECE (Shifted FURTHER RIGHT & DOWN) */}
+          <div className="absolute -right-4 sm:-right-8 lg:-right-12 top-[65%] sm:top-[60%] z-20 w-28 sm:w-36 lg:w-44 pointer-events-none transform rotate-6 transition-transform duration-700 hover:rotate-0">
             <img 
-              src={rightImg} 
-              alt="Handcrafted Chocolate Bar Piece" 
-              className="w-full h-auto object-contain filter drop-shadow-[0_12px_20px_rgba(60,30,15,0.2)] animate-float-slow"
+              src={cleanRightImg} 
+              alt="Chocolate Piece" 
+              className="w-full h-auto object-contain filter drop-shadow-[0_16px_28px_rgba(60,30,15,0.35)] select-none animate-float-slow"
             />
           </div>
 
