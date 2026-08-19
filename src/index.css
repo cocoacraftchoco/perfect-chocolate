@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* User Provided Typography Tokens & Design System */
+:root {
+  --font-m-heading-font: 'Cinzel', 'Playfair Display', serif;
+  --font-southing: 'Great Vibes', 'Parisienne', 'Alex Brush', cursive;
+  --font-m-body-font: 'Instrument Serif', serif;
+  --font-barlow: 'Barlow', sans-serif;
+  
+  --text-14: 14px;
+  --text-16: 16px;
+  --text-18: 18px;
+  --text-20: 20px;
+  --text-22: 22px;
+  --text-24: 24px;
+  --text-28: 28px;
+  --text-30: 30px;
+  --text-32: 32px;
+  --text-35: 35px;
+  --text-36: 36px;
+  --text-40: 40px;
+  --text-64: 64px;
+  --text-85: 85px;
+  --text-110: 110px;
+  --text-128: 128px;
+  
+  --tracking-neg-0-96: -0.96px;
+  --tracking-1: 1px;
+  --tracking-1-4: 1.4px;
+}
+
+/* Custom Semantic Typography Classes */
+.type-h3 {
+  font-family: var(--font-m-heading-font);
+  font-size: clamp(48px, 8vw, var(--text-128));
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.type-h2 {
+  font-family: var(--font-m-heading-font);
+  font-size: clamp(40px, 7vw, var(--text-110));
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.type-large-title {
+  font-family: var(--font-southing);
+  font-size: clamp(48px, 8vw, var(--text-110));
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.type-h3-85 {
+  font-family: var(--font-m-heading-font);
+  font-size: clamp(36px, 6vw, var(--text-85));
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: var(--tracking-neg-0-96);
+}
+
+.type-h3-64 {
+  font-family: var(--font-m-heading-font);
+  font-size: clamp(32px, 5vw, var(--text-64));
+  font-weight: 500;
+  line-height: 1.00;
+}
+
+.type-h2-64 {
+  font-family: var(--font-m-heading-font);
+  font-size: clamp(32px, 5vw, var(--text-64));
+  font-weight: 400;
+  line-height: 1.00;
+}
+
+.type-body {
+  font-family: var(--font-southing);
+  font-size: clamp(24px, 3.5vw, var(--text-40));
+  font-weight: 400;
+  line-height: 1.50;
+}
+
+.type-large-title-40 {
+  font-family: var(--font-m-heading-font);
+  font-size: clamp(24px, 3.5vw, var(--text-40));
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.type-large-title-36 {
+  font-family: var(--font-m-body-font);
+  font-size: var(--text-36);
+  font-weight: 600;
+  line-height: 1.50;
+}
+
+.type-h2-30 {
+  font-family: var(--font-m-heading-font);
+  font-size: var(--text-30);
+  font-weight: 500;
+  line-height: 1.20;
+}
+
+.type-title {
+  font-family: var(--font-m-body-font);
+  font-size: var(--text-28);
+  font-weight: 600;
+  line-height: 1.20;
+}
+
+.type-heading {
+  font-family: var(--font-m-body-font);
+  font-size: var(--text-24);
+  font-weight: 600;
+  line-height: 1.50;
+}
+
+.type-link {
+  font-family: var(--font-m-heading-font);
+  font-size: var(--text-24);
+  font-weight: 400;
+  line-height: 1.00;
+}
+
+.type-subheading {
+  font-family: var(--font-m-body-font);
+  font-size: var(--text-22);
+  font-weight: 600;
+  line-height: 1.10;
+}
+
+.type-body-20 {
+  font-family: var(--font-m-body-font);
+  font-size: var(--text-20);
+  font-weight: 600;
+  line-height: 1.00;
+}
+
+.type-h3-20 {
+  font-family: var(--font-barlow);
+  font-size: var(--text-20);
+  font-weight: 500;
+  line-height: 1.50;
+}
+
+.type-large-body {
+  font-family: var(--font-m-body-font);
+  font-size: var(--text-18);
+  font-weight: 600;
+  line-height: 1.50;
+}
+
+.type-button {
+  font-family: var(--font-m-body-font);
+  font-size: var(--text-16);
+  font-weight: 500;
+  line-height: 1.44;
+}
+
+.type-body-16 {
+  font-family: var(--font-barlow);
+  font-size: var(--text-16);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-1);
+}
+
+.type-link-14 {
+  font-family: var(--font-m-body-font);
+  font-size: var(--text-14);
+  font-weight: 525;
+  line-height: 1.00;
+  letter-spacing: var(--tracking-1-4);
+}
+
+/* Gold Text Shimmer & Glow Effects */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FFF1C5 0%, #D4AF37 40%, #AA811C 75%, #F5E6B3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-metallic {
+  background: linear-gradient(90deg, #D4AF37 0%, #FFF8DC 25%, #E6C875 50%, #B58E29 75%, #D4AF37 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+.border-gold-gradient {
+  border-image: linear-gradient(to right, #D4AF37, #E6C875, #B58E29) 1;
+}
+
+/* Glassmorphism Cocoa Cards */
+.cocoa-glass-panel {
+  background: rgba(44, 20, 14, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.cocoa-glass-panel-hover:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #190B06;
+}
+::-webkit-scrollbar-thumb {
+  background: #4E2616;
+  border-radius: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6C3923;
+}
+
+/* Floating Liquid Chocolate Wave Animations */
+@keyframes waveFlow {
+  0% { transform: translateY(0px) scaleY(1); }
+  50% { transform: translateY(-10px) scaleY(1.08); }
+  100% { transform: translateY(0px) scaleY(1); }
+}
+
+@keyframes waveFlowSlow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-wave-flow {
+  animation: waveFlow 14s ease-in-out infinite;
+}
+
+.animate-wave-slow {
+  animation: waveFlowSlow 20s ease-in-out infinite;
+}
+
+/* Floating & Assembling Alphabet Animations (Hanah Sweets Style) */
+@keyframes floatAlphabet {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(6deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes floatAlphabetAlt {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(12px) rotate(-8deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.animate-float-alphabet {
+  animation: floatAlphabet 5s ease-in-out infinite;
+}
+
+.animate-float-alphabet-alt {
+  animation: floatAlphabetAlt 6s ease-in-out infinite;
+}
+

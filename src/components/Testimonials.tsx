@@ -1,0 +1,192 @@
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+// High resolution artisanal chocolate artwork assets for testimonials
+const rawLeftChocolate = 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=400&q=80';
+const rawRightChocolate = 'https://images.unsplash.com/photo-1548907040-4baa42d10919?auto=format&fit=crop&w=400&q=80';
+
+
+interface Testimonial {
+  id: number;
+  quote: string;
+  author: string;
+  location: string;
+}
+
+const TESTIMONIALS: Testimonial[] = [
+  {
+    id: 1,
+    quote: "I love all Perfect Chocolate products but the chocolate overload brownie has been my all-time favourite and truly justifies its name with its rich chocolate sweetness. Perfect Chocolate is truly one of our favourite places!",
+    author: "Meenakshi Verma",
+    location: "Pune"
+  },
+  {
+    id: 2,
+    quote: "The Dubai Pistachio & Knafeh Velvet bar is an absolute dream! The crunchiness of knafeh mixed with rich cocoa creates an unforgettable flavor profile.",
+    author: "Ananya Roy",
+    location: "Mumbai"
+  },
+  {
+    id: 3,
+    quote: "Handcrafted perfection in every bite. The 70% Dark Gold Reserve is my go-to luxury gift for family and friends. Highly recommended!",
+    author: "Rohan Sharma",
+    location: "Delhi"
+  }
+];
+
+export default function Testimonials() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [leftImg, setLeftImg] = useState<string>(rawLeftChocolate);
+  const [rightImg, setRightImg] = useState<string>(rawRightChocolate);
+
+  // Automatically make white backgrounds transparent for the 2 chocolate illustrations
+  useEffect(() => {
+    const processImage = (src: string, setter: (res: string) => void) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        ctx.drawImage(img, 0, 0);
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+
+          // Check if pixel is pure white / light off-white background
+          if (r > 225 && g > 225 && b > 225) {
+            data[i + 3] = 0; // Make 100% transparent
+          }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+        setter(canvas.toDataURL('image/png'));
+      };
+    };
+
+    processImage(rawLeftChocolate, setLeftImg);
+    processImage(rawRightChocolate, setRightImg);
+  }, []);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? TESTIMONIALS.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === TESTIMONIALS.length - 1 ? 0 : prev + 1));
+  };
+
+  const current = TESTIMONIALS[currentIndex];
+
+  return (
+    <section className="bg-[#FAF6ED] text-[#33180D] py-16 sm:py-20 px-4 relative overflow-hidden select-none border-t border-b border-[#E8DCC4]">
+      <div className="max-w-6xl mx-auto relative z-10">
+        
+        {/* Section Heading matching screenshot */}
+        <div className="text-center mb-8 sm:mb-12 space-y-2">
+          <h2 className="text-4xl sm:text-5xl font-serif font-medium text-[#C28A2B] tracking-wide">
+            Testimonials
+          </h2>
+          
+          {/* Subtle light teal/blue 4 diamond dots pattern from screenshot */}
+          <div className="flex items-center justify-center gap-2 pt-1 text-[#8ECAE6] text-xs sm:text-sm">
+            <span>◆</span>
+            <span>◆</span>
+            <span>◆</span>
+            <span>◆</span>
+          </div>
+        </div>
+
+        {/* Testimonial Content Wrapper */}
+        <div className="relative min-h-[260px] sm:min-h-[220px] flex items-center justify-center">
+          
+          {/* LEFT CHOCOLATE ILLUSTRATION (Floating higher up near top left) */}
+          <div className="absolute left-0 sm:left-2 lg:left-4 -top-6 sm:-top-10 lg:-top-14 z-20 w-20 sm:w-32 lg:w-36 pointer-events-none transform -rotate-12 transition-transform duration-700 hover:rotate-0">
+            <img 
+              src={leftImg} 
+              alt="Artisanal Chocolate Truffle" 
+              className="w-full h-auto object-contain filter drop-shadow-[0_12px_20px_rgba(60,30,15,0.2)] animate-float-slow"
+            />
+          </div>
+
+          {/* RIGHT CHOCOLATE ILLUSTRATION (Shifted further to the right) */}
+          <div className="absolute -right-2 sm:-right-6 lg:-right-10 top-[65%] sm:top-[68%] z-20 w-20 sm:w-32 lg:w-36 pointer-events-none transform rotate-12 transition-transform duration-700 hover:rotate-0">
+            <img 
+              src={rightImg} 
+              alt="Handcrafted Chocolate Bar Piece" 
+              className="w-full h-auto object-contain filter drop-shadow-[0_12px_20px_rgba(60,30,15,0.2)] animate-float-slow"
+            />
+          </div>
+
+          {/* MAIN TESTIMONIAL CAROUSEL CONTAINER (Wider max-w-5xl so quote spans 2-3 lines) */}
+          <div className="max-w-4xl lg:max-w-5xl mx-auto px-10 sm:px-20 lg:px-24 text-center space-y-4 relative z-10">
+            
+            {/* Outlined Gold Opening Quotes Icon “ */}
+            <div className="flex justify-center mb-1">
+              <svg className="w-10 h-10 sm:w-12 sm:h-12 text-[#C28A2B]/80 fill-none stroke-current stroke-[1.5]" viewBox="0 0 24 24">
+                <path d="M10 11H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4v6zm0 0c0 3.5-2.5 5-5 5.5M20 11h-4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4v6zm0 0c0 3.5-2.5 5-5 5.5" />
+              </svg>
+            </div>
+
+            {/* Testimonial Quote Text - Spanning 2-3 lines cleanly */}
+            <p className="text-base sm:text-lg lg:text-xl text-[#4A2619] font-sans font-normal leading-relaxed tracking-wide min-h-[75px] flex items-center justify-center transition-all duration-500 max-w-3xl mx-auto">
+              "{current.quote}"
+            </p>
+
+            {/* Author Name and Location */}
+            <div className="pt-1">
+              <h4 className="text-base sm:text-lg font-bold font-sans text-[#C28A2B] tracking-wide">
+                {current.author}, {current.location}
+              </h4>
+            </div>
+
+            {/* Navigation Arrows */}
+            <div className="flex items-center justify-between absolute -left-2 -right-2 sm:left-4 sm:right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+              <button
+                onClick={handlePrev}
+                className="pointer-events-auto p-1.5 text-[#C28A2B] hover:text-[#8C6016] transition-colors rounded-full hover:bg-gold-500/10 focus:outline-none"
+                aria-label="Previous Testimonial"
+              >
+                <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
+              </button>
+
+              <button
+                onClick={handleNext}
+                className="pointer-events-auto p-1.5 text-[#C28A2B] hover:text-[#8C6016] transition-colors rounded-full hover:bg-gold-500/10 focus:outline-none"
+                aria-label="Next Testimonial"
+              >
+                <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
+              </button>
+            </div>
+
+            {/* Carousel Dots */}
+            <div className="flex justify-center items-center gap-2 pt-3">
+              {TESTIMONIALS.map((t, idx) => (
+                <button
+                  key={t.id}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`h-2 transition-all duration-300 rounded-full ${
+                    idx === currentIndex
+                      ? 'w-6 bg-[#C28A2B]'
+                      : 'w-2 bg-[#C28A2B]/30 hover:bg-[#C28A2B]/60'
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
