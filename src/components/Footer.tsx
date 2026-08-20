@@ -92,7 +92,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* COLUMN 1: BIG LOGO WITH BADGES UNDER IT (LEFT) + DESCRIPTION (RIGHT) */}
-          <div className="md:col-span-6 lg:col-span-6 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
+          <div className="md:col-span-7 lg:col-span-7 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
             
             {/* Big Brand Logo & Badges Directly Under Logo */}
             <div className="shrink-0 flex flex-col items-center sm:items-start gap-2">
@@ -137,10 +137,10 @@ export default function Footer() {
 
           </div>
 
-          {/* COLUMN 2: Factory Contact Info */}
-          <div className="md:col-span-3 lg:col-span-3 space-y-5">
+          {/* COLUMN 2: Single Consolidated Contact Info */}
+          <div className="md:col-span-5 lg:col-span-5 space-y-5 sm:pl-6 border-t md:border-t-0 md:border-l border-[#D4AF37]/20 pt-6 md:pt-0">
             <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#EAB308] tracking-wide border-b border-[#D4AF37]/30 pb-2">
-              FACTORY
+              CONTACT US
             </h3>
 
             <div className="space-y-4 text-xs sm:text-sm font-barlow">
@@ -150,8 +150,23 @@ export default function Footer() {
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-widest text-[#EAB308] font-bold">PHONE</div>
-                  <div className="text-[#F8EFE4] font-mono">+1 (800) 555-2626</div>
+                  <div className="text-[11px] uppercase tracking-widest text-[#EAB308] font-bold">PHONE:</div>
+                  <a href="tel:+919106467043" className="text-[#F8EFE4] hover:text-[#EAB308] font-mono transition-colors">
+                    +91 91064 67043
+                  </a>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-[#3D1E15] border border-[#D4AF37]/40 text-[#EAB308] shrink-0 mt-0.5 shadow-md">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-widest text-[#EAB308] font-bold">EMAIL:</div>
+                  <a href="mailto:cocoacraft.choco@gmail.com" className="text-[#F8EFE4] hover:text-[#EAB308] transition-colors">
+                    cocoacraft.choco@gmail.com
+                  </a>
                 </div>
               </div>
 
@@ -165,65 +180,6 @@ export default function Footer() {
                   <div className="text-[#D8C2B0] leading-snug">
                     Thaltej-Cross Road, Ahmedabad 380059
                   </div>
-                </div>
-              </div>
-
-              {/* Email */}
-              <div className="flex items-start gap-3">
-                <div className="p-2 rounded-lg bg-[#3D1E15] border border-[#D4AF37]/40 text-[#EAB308] shrink-0 mt-0.5 shadow-md">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-widest text-[#EAB308] font-bold">EMAIL:</div>
-                  <a href="mailto:factory@perfectchocolate.com" className="text-[#F8EFE4] hover:text-[#EAB308] transition-colors">
-                    factory@perfectchocolate.com
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* COLUMN 3: About / Atelier Contact Info */}
-          <div className="md:col-span-3 lg:col-span-3 space-y-5">
-            <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#EAB308] tracking-wide border-b border-[#D4AF37]/30 pb-2">
-              ABOUT
-            </h3>
-
-            <div className="space-y-4 text-xs sm:text-sm font-barlow">
-              {/* Phone */}
-              <div className="flex items-start gap-3">
-                <div className="p-2 rounded-lg bg-[#3D1E15] border border-[#D4AF37]/40 text-[#EAB308] shrink-0 mt-0.5 shadow-md">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-widest text-[#EAB308] font-bold">PHONE</div>
-                  <div className="text-[#F8EFE4] font-mono">+1 (800) 888-4949</div>
-                </div>
-              </div>
-
-              {/* Location */}
-              <div className="flex items-start gap-3">
-                <div className="p-2 rounded-lg bg-[#3D1E15] border border-[#D4AF37]/40 text-[#EAB308] shrink-0 mt-0.5 shadow-md">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-widest text-[#EAB308] font-bold">OUR LOCATION:</div>
-                  <div className="text-[#D8C2B0] leading-snug">
-                    Thaltej-Cross Road, Ahmedabad 380059
-                  </div>
-                </div>
-              </div>
-
-              {/* Email */}
-              <div className="flex items-start gap-3">
-                <div className="p-2 rounded-lg bg-[#3D1E15] border border-[#D4AF37]/40 text-[#EAB308] shrink-0 mt-0.5 shadow-md">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-widest text-[#EAB308] font-bold">EMAIL:</div>
-                  <a href="mailto:info@perfectchocolate.com" className="text-[#F8EFE4] hover:text-[#EAB308] transition-colors">
-                    info@perfectchocolate.com
-                  </a>
                 </div>
               </div>
             </div>

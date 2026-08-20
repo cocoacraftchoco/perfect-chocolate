@@ -4,13 +4,15 @@ import { Sparkles } from 'lucide-react';
 // @ts-ignore
 import step1Img from '../images/step1.png';
 // @ts-ignore
-import step2Img from '../images/step2.png';
+import step2Img from '../images/step2.jpg';
 // @ts-ignore
 import step3Img from '../images/step3.png';
 // @ts-ignore
-import step4Img from '../images/step4.png';
+import step4Img from '../images/step4.jpg';
 // @ts-ignore
 import step5Img from '../images/step5.png';
+
+
 
 interface JourneyStep {
   id: number;
@@ -90,8 +92,8 @@ export default function ChocolateJourney() {
           const g = data[i + 1];
           const b = data[i + 2];
 
-          // 1. Erase White / Off-White / Cream background pixels (Step 01 white box)
-          const isWhite = r > 215 && g > 215 && b > 215;
+          // 1. Erase White / Off-White / Cream background pixels (Step 01 white box & Step 03 paper texture)
+          const isWhite = r > 195 && g > 195 && b > 195;
 
           // 2. Erase Grey / Light-Grey Checkerboard pattern pixels (Step 05 fake PNG pattern)
           const isNeutralGrey = Math.abs(r - g) < 14 && Math.abs(g - b) < 14;
