@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Sparkles, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Sparkles, ArrowRight, ShoppingBag } from 'lucide-react';
 // @ts-ignore
 import white2Img from '../images/white2.webp';
 
@@ -241,9 +241,10 @@ const CATEGORY_GROUPS: CategoryGroup[] = [
 interface ProductsPageProps {
   initialCategory?: string;
   onBackToHome: () => void;
+  onAddToCart?: (product: any) => void;
 }
 
-export default function ProductsPage({ initialCategory = 'all', onBackToHome }: ProductsPageProps) {
+export default function ProductsPage({ initialCategory = 'all', onBackToHome, onAddToCart }: ProductsPageProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
 
   useEffect(() => {
@@ -403,6 +404,24 @@ export default function ProductsPage({ initialCategory = 'all', onBackToHome }: 
                         <p className="text-sm sm:text-base text-[#5A453B] font-sans font-normal leading-relaxed">
                           {item.description}
                         </p>
+
+                        {onAddToCart && (
+                          <div className="pt-2">
+                            <button
+                              onClick={() => onAddToCart({
+                                id: item.id,
+                                name: item.title,
+                                price: 1499,
+                                image: item.heroImage,
+                                cacao: item.subtitle
+                              })}
+                              className="inline-flex items-center gap-2 bg-[#2A130A] hover:bg-[#C06C54] text-[#FAF6ED] px-6 py-3 rounded-full text-xs font-barlow font-bold uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer"
+                            >
+                              <ShoppingBag className="w-4 h-4" />
+                              <span>Add to Bag • ₹1,499</span>
+                            </button>
+                          </div>
+                        )}
                       </div>
 
                     </div>
