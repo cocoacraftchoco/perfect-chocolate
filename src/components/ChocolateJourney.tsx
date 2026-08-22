@@ -12,8 +12,6 @@ import step4Img from '../images/step4.jpg';
 // @ts-ignore
 import step5Img from '../images/step5.png';
 
-
-
 interface JourneyStep {
   id: number;
   stepNum: string;
@@ -127,7 +125,7 @@ export default function ChocolateJourney() {
   const centerImageSrc = cleanImages[activeStep] || current.rawImg;
 
   return (
-    <section id="journey" className="py-20 lg:py-28 bg-[#FFFDF9] text-[#2A130A] relative overflow-hidden select-none border-t border-b border-[#D4AF37]/30">
+    <section id="journey" className="py-20 lg:py-28 bg-[#F7F0E6] text-[#2A130A] relative overflow-hidden select-none border-t border-b border-[#D4AF37]/30">
 
       {/* Ambient Warm Golden Radial Backlight Effects */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D4AF37]/15 rounded-full filter blur-[140px] pointer-events-none" />
@@ -154,10 +152,7 @@ export default function ChocolateJourney() {
         {/* CIRCULAR WHEEL & CENTER SPOTLIGHT CONTAINER */}
         <div className="relative max-w-4xl mx-auto min-h-[580px] sm:min-h-[640px] flex items-center justify-center">
 
-          {/* ORBITAL BACKGROUND CIRCLE PATH */}
-          <div className="absolute w-[320px] h-[320px] sm:w-[480px] sm:h-[480px] rounded-full border border-dashed border-[#D4AF37]/40 pointer-events-none animate-spin-slow" />
-
-          {/* CURVED SVG CONNECTING CIRCLE */}
+          {/* SINGLE CLEAN CURVED CONNECTING CIRCLE (OUTER ORBIT ONLY) */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-60" viewBox="0 0 100 100" preserveAspectRatio="none">
             <circle cx="50" cy="50" r="42" fill="none" stroke="#D4AF37" strokeWidth="0.4" strokeDasharray="1 1.5" />
           </svg>

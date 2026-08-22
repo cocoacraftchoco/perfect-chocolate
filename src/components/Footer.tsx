@@ -81,7 +81,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="relative bg-[#1D0E08] text-[#F8EFE4] overflow-hidden pt-16 pb-12 font-body border-t border-[#D4AF37]/20">
+    <footer id="contact" className="relative bg-[#1D0E08] text-[#F8EFE4] overflow-hidden pt-16 pb-12 font-body border-t border-[#D4AF37]/20">
       
       {/* Ambient Gold Radial Glow Backlights */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full filter blur-[120px] pointer-events-none" />

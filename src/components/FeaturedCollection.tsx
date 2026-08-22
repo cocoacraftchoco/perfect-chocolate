@@ -111,7 +111,7 @@ export default function FeaturedCollection({ onAddToCart }: FeaturedCollectionPr
                 <img
                   src={prod.image}
                   alt={prod.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+                  className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
                 />
 
                 {/* Floating Tag */}
@@ -158,14 +158,10 @@ export default function FeaturedCollection({ onAddToCart }: FeaturedCollectionPr
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-cocoa-800/60">
-                  <div className="text-xl font-bold font-heading text-gold-metallic">
-                    ₹{prod.price.toLocaleString('en-IN')}
-                  </div>
-
+                <div className="flex items-center justify-end pt-3 border-t border-cocoa-800/60">
                   <button
                     onClick={() => handleAdd(prod)}
-                    className={`px-4 py-2 rounded-xl text-xs font-barlow tracking-wider uppercase font-semibold transition-all duration-300 flex items-center gap-1.5 ${addedIds[prod.id]
+                    className={`w-full py-2.5 rounded-xl text-xs font-barlow tracking-wider uppercase font-semibold transition-all duration-300 flex items-center justify-center gap-1.5 ${addedIds[prod.id]
                         ? 'bg-emerald-600 text-white'
                         : 'bg-cocoa-800/80 text-gold-300 hover:bg-gold-500 hover:text-cocoa-950 border border-gold-500/30 shadow-md'
                       }`}
@@ -208,11 +204,10 @@ export default function FeaturedCollection({ onAddToCart }: FeaturedCollectionPr
               <h3 className="type-h3-64 text-cream-100">{selectedProduct.name}</h3>
               <p className="text-cocoa-200 text-sm">{selectedProduct.description}</p>
             </div>
-            <div className="flex items-center justify-between pt-4 border-t border-cocoa-800">
-              <span className="text-2xl font-heading text-gold-metallic">₹{selectedProduct.price.toLocaleString('en-IN')}</span>
+            <div className="flex items-center justify-end pt-4 border-t border-cocoa-800">
               <button
                 onClick={() => { handleAdd(selectedProduct); setSelectedProduct(null); }}
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-gold-400 to-gold-600 text-cocoa-950 font-bold uppercase text-xs tracking-wider"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-gold-400 to-gold-600 text-cocoa-950 font-bold uppercase text-xs tracking-wider"
               >
                 Add to Luxury Order
               </button>

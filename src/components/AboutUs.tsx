@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 // @ts-ignore
 import meltingChocolateImg from '../images/melting_chocolate_brandname.png';
 // @ts-ignore
-import cacaoLeafImg from '../images/cacao_leaf_cutout.png';
+import aboutBgImg from '../images/about_bg.webp';
 
 export default function AboutUs() {
   const [transparentImg, setTransparentImg] = useState<string>(meltingChocolateImg);
-  const [transparentLeaf, setTransparentLeaf] = useState<string>(cacaoLeafImg);
 
   useEffect(() => {
     // Process Melting Chocolate Bar Image (Remove Black background)
@@ -35,44 +34,17 @@ export default function AboutUs() {
       ctx.putImageData(imgData, 0, 0);
       setTransparentImg(canvas.toDataURL('image/png'));
     };
-
-    // Canvas Processing: Erase all white/cream square box background pixels from Cacao Leaf
-    const lImg = new Image();
-    lImg.src = cacaoLeafImg;
-    lImg.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = lImg.width;
-      canvas.height = lImg.height;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-
-      ctx.drawImage(lImg, 0, 0);
-      const imgData = ctx.getImageData(0, 0, lImg.width, lImg.height);
-      const data = imgData.data;
-
-      for (let i = 0; i < data.length; i += 4) {
-        const r = data[i];
-        const g = data[i + 1];
-        const b = data[i + 2];
-        if (r > 200 && g > 195 && b > 185) {
-          data[i + 3] = 0; // 100% Transparent
-        }
-      }
-
-      ctx.putImageData(imgData, 0, 0);
-      setTransparentLeaf(canvas.toDataURL('image/png'));
-    };
   }, []);
 
   return (
-    <section className="bg-[#FAF6EE] py-16 sm:py-24 relative overflow-hidden select-none border-t border-b border-[#E8DCC4]">
+    <section id="story" className="bg-[#FAF6EE] pt-12 pb-20 sm:pt-16 sm:pb-24 lg:pt-20 lg:pb-28 relative overflow-visible select-none border-t border-b border-[#E8DCC4]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Main Grid Container */}
         <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-0 lg:gap-0">
           
-          {/* LEFT COLUMN: Melting Chocolate Bar Graphic (Shifted Slightly Leftward) */}
-          <div className="lg:col-span-5 relative z-30 flex justify-center lg:justify-start lg:-translate-x-2 xl:translate-x-0 -translate-y-4 sm:-translate-y-8 lg:-translate-y-12">
+          {/* LEFT COLUMN: Melting Chocolate Bar Graphic */}
+          <div className="lg:col-span-5 relative z-30 flex justify-center lg:justify-start lg:-translate-x-2 xl:translate-x-0 -translate-y-4 sm:-translate-y-6 lg:-translate-y-8">
             <div className="w-96 sm:w-[520px] lg:w-[680px] xl:w-[740px] transition-transform duration-700 hover:scale-105 filter drop-shadow-[0_28px_50px_rgba(20,5,0,0.6)]">
               <img 
                 src={transparentImg} 
@@ -82,79 +54,64 @@ export default function AboutUs() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Dark Chocolate Container Card */}
+          {/* RIGHT COLUMN: About Us Card Overlaying Content on top of about_bg.webp */}
           <div className="lg:col-span-7 relative z-10 lg:-ml-12 mt-4 lg:mt-0">
 
-            {/* Dark Chocolate Box Container */}
-            <div className="bg-[#1D0E08] text-[#FAF6EE] pt-5 pb-8 pr-6 sm:pt-7 sm:pb-12 sm:pr-10 lg:pt-8 lg:pb-14 lg:pr-12 pl-16 sm:pl-32 lg:pl-44 rounded-t-3xl shadow-2xl relative z-10 border-t border-l border-r border-[#5A2E20] space-y-4 overflow-visible">
+            {/* Container Card with about_bg.webp Background Image */}
+            <div className="relative text-[#FAF6EE] pt-6 pb-24 sm:pt-8 sm:pb-28 lg:pt-10 lg:pb-36 pr-6 sm:pr-10 lg:pr-12 pl-16 sm:pl-32 lg:pl-44 z-10 overflow-visible">
+              
+              {/* Background Image Asset: about_bg.webp */}
+              <img 
+                src={aboutBgImg} 
+                alt="About Us Card Background" 
+                className="absolute inset-0 w-full h-full object-fill object-top z-0 pointer-events-none rounded-3xl filter drop-shadow-[0_16px_32px_rgba(0,0,0,0.4)]"
+              />
 
-              {/* REALISTIC SINGLE GREEN CACAO LEAF FLOATING AT TOP RIGHT CORNER (Pure Transparent PNG) */}
-              <div className="absolute -top-10 -right-4 sm:-top-14 sm:-right-8 z-30 w-28 h-36 sm:w-36 sm:h-44 pointer-events-none transform rotate-45 transition-transform duration-700">
-                <img 
-                  src={transparentLeaf} 
-                  alt="Single Realistic Cacao Leaf" 
-                  className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.7)] select-none"
-                />
+              {/* Text Content Container Overlay */}
+              <div className="relative z-10 space-y-4">
+                {/* Big Calligraphic Cursive Title: About Us */}
+                <div className="-mt-1 sm:-mt-2">
+                  <h2 className="font-southing text-5xl sm:text-6xl lg:text-7xl text-[#EAB308] tracking-wide font-normal select-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+                    About Us
+                  </h2>
+                </div>
+
+                {/* 3 Same Consistent Elegant Fancy Serif Italic Paragraphs */}
+                <div className="space-y-4 text-base sm:text-lg lg:text-xl text-[#F8EFE4] font-serif italic font-medium leading-relaxed tracking-wide drop-shadow-md">
+                  {/* Paragraph 1 */}
+                  <p>
+                    Perfect Chocolate is a premium chocolate brand dedicated to creating delicious, beautifully crafted chocolates made with quality ingredients and a passion for exceptional taste.
+                  </p>
+
+                  {/* Paragraph 2 */}
+                  <p>
+                    From everyday indulgence to special celebrations and gifting, we create chocolates that bring people together and make every moment a little sweeter.
+                  </p>
+
+                  {/* Paragraph 3 */}
+                  <p>
+                    Our focus is on quality, creativity, freshness, and consistency, ensuring that every Perfect Chocolate delivers a rich and memorable experience.
+                  </p>
+                </div>
+
+                {/* Tagline Highlight */}
+                <div className="pt-1">
+                  <p className="text-[#EAB308] font-serif italic text-base sm:text-lg lg:text-xl border-l-2 border-[#D4AF37]/60 pl-3 py-0.5 drop-shadow-md">
+                    Perfect Chocolate — crafted with passion, made to be remembered.
+                  </p>
+                </div>
+
+                {/* Golden Leaf-Shaped "Read More" Button */}
+                <div className="pt-3 pb-2 flex justify-start pl-0">
+                  <button 
+                    onClick={() => document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="px-8 py-2 sm:px-10 sm:py-2.5 bg-[#E5A800] hover:bg-[#D49800] text-[#3B170B] font-serif italic text-xl sm:text-2xl font-normal tracking-wide rounded-tl-[32px] rounded-br-[32px] rounded-tr-none rounded-bl-none shadow-[0_6px_18px_rgba(0,0,0,0.4)] hover:shadow-[0_10px_25px_rgba(229,168,0,0.5)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex items-center justify-center cursor-pointer"
+                  >
+                    <span>Read More</span>
+                  </button>
+                </div>
               </div>
 
-              {/* Big Calligraphic Cursive Title: About Us */}
-              <div className="-mt-1 sm:-mt-2">
-                <h2 className="font-southing text-5xl sm:text-6xl lg:text-7xl text-[#EAB308] tracking-wide font-normal select-none drop-shadow-md">
-                  About Us
-                </h2>
-              </div>
-
-              {/* 3 Same Consistent Elegant Fancy Serif Paragraphs */}
-              <div className="space-y-4 text-base sm:text-lg text-[#F8EFE4] font-serif font-medium leading-relaxed tracking-wide">
-                {/* Paragraph 1 */}
-                <p>
-                  Perfect Chocolate is a premium chocolate brand dedicated to creating delicious, beautifully crafted chocolates made with quality ingredients and a passion for exceptional taste.
-                </p>
-
-                {/* Paragraph 2 */}
-                <p>
-                  From everyday indulgence to special celebrations and gifting, we create chocolates that bring people together and make every moment a little sweeter.
-                </p>
-
-                {/* Paragraph 3 */}
-                <p>
-                  Our focus is on quality, creativity, freshness, and consistency, ensuring that every Perfect Chocolate delivers a rich and memorable experience.
-                </p>
-              </div>
-
-              {/* Tagline Highlight */}
-              <div className="pt-1">
-                <p className="text-gold-300 font-serif italic text-base sm:text-lg border-l-2 border-[#D4AF37]/60 pl-3 py-0.5">
-                  Perfect Chocolate — crafted with passion, made to be remembered.
-                </p>
-              </div>
-
-              {/* Golden Yellow Calligraphic "Read More" Button */}
-              <div className="pt-3 flex justify-start pl-0">
-                <button className="px-9 py-3 sm:px-11 sm:py-3.5 rounded-xl bg-[#EAB308] hover:bg-[#D9A306] text-[#2C140E] font-southing text-3xl sm:text-4xl font-normal tracking-wide shadow-[0_8px_20px_rgba(234,179,8,0.35)] hover:shadow-[0_12px_28px_rgba(234,179,8,0.5)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2 group">
-                  <span>Read More</span>
-                </button>
-              </div>
-
-            </div>
-
-            {/* ORGANIC RANDOM CURVED MELTED CHOCOLATE DRIPPING SVG EDGE */}
-            <div className="w-full overflow-hidden leading-none relative -mt-1 z-20 pointer-events-none filter drop-shadow-[0_14px_22px_rgba(30,10,5,0.38)]">
-              <svg
-                viewBox="0 0 1000 240"
-                preserveAspectRatio="none"
-                className="w-full h-28 sm:h-40 lg:h-52 text-[#1D0E08] fill-current block"
-              >
-                <path d="M0 0 L1000 0 L1000 30
-                         C965 30, 945 90, 915 90 C885 90, 865 30, 820 30
-                         C770 30, 730 85, 680 85 C630 85, 600 25, 580 25
-                         C570 25, 565 175, 550 180 C538 185, 528 30, 495 30
-                         C475 30, 480 155, 450 160 C420 165, 408 35, 370 35
-                         C355 35, 350 115, 335 115 C320 115, 308 30, 275 30
-                         C255 30, 240 60, 215 60 C190 60, 180 25, 155 25
-                         C135 25, 145 200, 110 205 C75 210, 70 30, 45 30
-                         C35 30, 30 110, 20 110 C10 110, 5 30, 0 30 Z" />
-              </svg>
             </div>
 
           </div>
@@ -163,14 +120,14 @@ export default function AboutUs() {
 
       </div>
 
-      {/* FLOATING QUICK CONTACT WIDGET (ONLY OFFICIAL WHATSAPP LOGO BUTTON) */}
+      {/* FLOATING QUICK CONTACT WIDGET (WITH PRE-FILLED CUSTOMIZED WHATSAPP MESSAGE) */}
       <div className="fixed bottom-6 right-6 z-50">
         <a
-          href="https://wa.me/971505565885"
+          href="https://wa.me/919106467043?text=Hello%20Perfect%20Chocolate!%20I%20would%20like%20to%20get%20more%20information%20about%20your%20handcrafted%20chocolates."
           target="_blank"
           rel="noopener noreferrer"
           className="w-14 h-14 sm:w-16 sm:h-16 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full flex items-center justify-center shadow-[0_10px_25px_rgba(37,211,102,0.45)] hover:scale-110 active:scale-95 transition-all duration-300 group"
-          title="Chat on WhatsApp"
+          title="Chat on WhatsApp (+91 91064 67043)"
           aria-label="Chat on WhatsApp"
         >
           {/* Official WhatsApp Logo SVG */}

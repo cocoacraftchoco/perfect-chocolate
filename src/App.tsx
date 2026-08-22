@@ -2,12 +2,14 @@ import { useState } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import AboutUs from './components/AboutUs';
+import TaglineBanner from './components/TaglineBanner';
 import ChocolateJourney from './components/ChocolateJourney';
 import FeaturedCollection from './components/FeaturedCollection';
 import Testimonials from './components/Testimonials';
 import StudioModal from './components/StudioModal';
 import CartDrawer from './components/CartDrawer';
 import Footer from './components/Footer';
+import ProductsPage from './components/ProductsPage';
 
 interface CartItem {
   id: string;
@@ -19,6 +21,8 @@ interface CartItem {
 }
 
 export default function App() {
+  const [view, setView] = useState<'home' | 'products'>('home');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isStudioOpen, setIsStudioOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -55,7 +59,7 @@ export default function App() {
         {
           id: product.id,
           name: product.name,
-          price: product.price,
+          price: product.price || 1499,
           quantity: 1,
           image: product.image,
           cacao: product.cacao,
@@ -75,32 +79,66 @@ export default function App() {
     );
   };
 
+  const handleSelectCategory = (catId: string) => {
+    setSelectedCategory(catId);
+    setView('products');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavigateHome = (sectionId?: string) => {
+    setView('home');
+    if (sectionId) {
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        section?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#1C0D07] text-[#FAF6ED] font-body flex flex-col selection:bg-gold-500 selection:text-cocoa-950">
-      {/* Minimal Navigation Header */}
-      <Navbar />
+      {/* Navigation Header */}
+      <Navbar 
+        onSelectCategory={handleSelectCategory}
+        onNavigateHome={handleNavigateHome}
+      />
 
-      {/* Main Content Areas */}
+      {/* Main Content View Switcher */}
       <main className="flex-1">
-        {/* Hero Section */}
-        <HeroSection
-          onExploreClick={() => {
-            const section = document.getElementById('story');
-            section?.scrollIntoView({ behavior: 'smooth' });
-          }}
-        />
+        {view === 'products' ? (
+          <ProductsPage 
+            initialCategory={selectedCategory}
+            onBackToHome={() => handleNavigateHome('home')}
+            onAddToCart={handleAddToCart}
+          />
+        ) : (
+          <>
+            {/* Hero Section */}
+            <HeroSection
+              onExploreClick={() => {
+                const section = document.getElementById('story');
+                section?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            />
 
-        {/* About Us Section */}
-        <AboutUs />
+            {/* About Us Section */}
+            <AboutUs />
 
-        {/* 5-Step Bean to Bar Artisanal Journey Section */}
-        <ChocolateJourney />
+            {/* Tagline Banner Section */}
+            <TaglineBanner />
 
-        {/* Featured Products Showcase */}
-        <FeaturedCollection onAddToCart={handleAddToCart} />
+            {/* 5-Step Bean to Bar Artisanal Journey Section */}
+            <ChocolateJourney />
 
-        {/* Testimonials Section (Theobroma Styled with 2 Chocolates) */}
-        <Testimonials />
+            {/* Featured Products Showcase */}
+            <FeaturedCollection onAddToCart={handleAddToCart} />
+
+            {/* Testimonials Section */}
+            <Testimonials />
+          </>
+        )}
       </main>
 
       {/* Footer */}
